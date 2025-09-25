@@ -1,0 +1,10 @@
+
+ NX   Failed to process project graph.
+
+An error occurred while processing files for the @nx/vite/plugin plugin (Defined at nx.json#plugins[2])
+.
+  - vite.config.ts: require() of ES Module D:\Dự án cá nhân\clicon-ecommerce\node_modules\vite\dist\node\index.js from D:\Dự án cá nhân\clicon-ecommerce\vite.config.ts not supported.
+Instead change the require of index.js in D:\Dự án cá nhân\clicon-ecommerce\vite.config.ts to a dynamic import() which is available in all CommonJS modules.
+
+
+[31mfailed to load config from D:\Dự án cá nhân\clicon-ecommerce\vite.config.ts[39m
