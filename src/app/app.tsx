@@ -21,9 +21,6 @@ const TrackOrderPage = React.lazy(() => import('../pages/TrackOrderPage'));
 const AboutPage = React.lazy(() => import('../pages/AboutPage'));
 const ContactPage = React.lazy(() => import('../pages/ContactPage'));
 const WishlistPage = React.lazy(() => import('../pages/WishlistPage'));
-const GlassmorphismShowcase = React.lazy(
-  () => import('../pages/GlassmorphismShowcase')
-);
 
 export function App() {
   // Hook để scroll lên top khi chuyển trang
@@ -46,7 +43,6 @@ export function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/glassmorphism" element={<GlassmorphismShowcase />} />
 
           {/* Shopping Flow */}
           <Route path="/cart" element={<CartPage />} />

@@ -38,6 +38,53 @@ export const FALLBACK_IMAGES = {
 
 // Enhanced image URLs with better quality and optimization
 export const ENHANCED_PRODUCT_IMAGES = {
+  // Keyboards
+  keyboards: [
+    'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1595044426077-d36d9236d54a?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+  ],
+
+  // Mice
+  mice: [
+    'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1612198473297-d8e6a00b44f4?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+  ],
+
+  // Monitors
+  monitors: [
+    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+  ],
+
+  // Webcams
+  webcams: [
+    'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1616788494672-ec8b6fe1e4a9?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+  ],
+
+  // Speakers
+  speakers: [
+    'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+    'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
+  ],
+
   // Laptops & Computers
   laptops: [
     'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=800&fit=crop&crop=center&auto=format&q=85',
@@ -156,6 +203,36 @@ export function getCategoryFallback(category: string): string {
   const normalizedCategory = category.toLowerCase();
 
   if (
+    normalizedCategory.includes('keyboard') ||
+    normalizedCategory.includes('key')
+  ) {
+    return 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&h=800&fit=crop&crop=center&auto=format&q=80';
+  }
+  if (
+    normalizedCategory.includes('mouse') ||
+    normalizedCategory.includes('mice')
+  ) {
+    return 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&h=800&fit=crop&crop=center&auto=format&q=80';
+  }
+  if (
+    normalizedCategory.includes('monitor') ||
+    normalizedCategory.includes('display')
+  ) {
+    return 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&h=800&fit=crop&crop=center&auto=format&q=80';
+  }
+  if (
+    normalizedCategory.includes('webcam') ||
+    normalizedCategory.includes('camera')
+  ) {
+    return 'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800&h=800&fit=crop&crop=center&auto=format&q=80';
+  }
+  if (
+    normalizedCategory.includes('speaker') ||
+    normalizedCategory.includes('sound')
+  ) {
+    return 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&h=800&fit=crop&crop=center&auto=format&q=80';
+  }
+  if (
     normalizedCategory.includes('laptop') ||
     normalizedCategory.includes('computer')
   ) {
@@ -215,6 +292,28 @@ export function getCategoryImages(category: string, count = 3): string[] {
   let imagePool: string[] = [];
 
   if (
+    normalizedCategory.includes('keyboard') ||
+    normalizedCategory.includes('key')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.keyboards;
+  } else if (
+    normalizedCategory.includes('mouse') ||
+    normalizedCategory.includes('mice')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.mice;
+  } else if (
+    normalizedCategory.includes('monitor') ||
+    normalizedCategory.includes('display')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.monitors;
+  } else if (normalizedCategory.includes('webcam')) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.webcams;
+  } else if (
+    normalizedCategory.includes('speaker') ||
+    normalizedCategory.includes('sound')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.speakers;
+  } else if (
     normalizedCategory.includes('laptop') ||
     normalizedCategory.includes('computer')
   ) {
@@ -276,6 +375,28 @@ export function getUniqueProductImages(
 
   // Get category-specific image pool
   if (
+    normalizedCategory.includes('keyboard') ||
+    normalizedCategory.includes('key')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.keyboards;
+  } else if (
+    normalizedCategory.includes('mouse') ||
+    normalizedCategory.includes('mice')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.mice;
+  } else if (
+    normalizedCategory.includes('monitor') ||
+    normalizedCategory.includes('display')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.monitors;
+  } else if (normalizedCategory.includes('webcam')) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.webcams;
+  } else if (
+    normalizedCategory.includes('speaker') ||
+    normalizedCategory.includes('sound')
+  ) {
+    imagePool = ENHANCED_PRODUCT_IMAGES.speakers;
+  } else if (
     normalizedCategory.includes('laptop') ||
     normalizedCategory.includes('computer')
   ) {

@@ -56,7 +56,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       >
         <Link to={`/product/${product.id}`}>
           <ImageWithSkeleton
-            src={product.images[0]}
+            src={product.images?.[0] || ''}
             alt={product.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-102 cursor-pointer transform-gpu"
             skeletonClassName="rounded-none"
@@ -64,6 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             width={400}
             height={400}
             quality={90}
+            fallbackSrc="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop&crop=center&auto=format&q=80"
           />
         </Link>
 

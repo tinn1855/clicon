@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, X } from 'lucide-react';
-import { Button } from '@/components/atoms';
+import { Button, ImageWithSkeleton } from '@/components/atoms';
 import { Price } from '@/components/atoms/Price';
 import { useWishlistStore, useCartStore } from '@/store';
 import { useToast } from '@/hooks/use-enhanced-toast';
@@ -119,11 +119,15 @@ export const WishlistQuickView: React.FC<WishlistQuickViewProps> = ({
             <div className="space-y-3 max-h-64 overflow-y-auto">
               {items.slice(0, 3).map((item) => (
                 <div key={item.id} className="flex gap-3 p-3 rounded-lg border">
-                  <img
-                    src={item.product.images[0]}
-                    alt={item.product.name}
-                    className="w-12 h-12 object-cover rounded bg-gray-100 flex-shrink-0"
-                  />
+                  <div className="w-12 h-12 flex-shrink-0">
+                    <ImageWithSkeleton
+                      src={item.product.images?.[0] || ''}
+                      alt={item.product.name}
+                      className="w-full h-full object-cover rounded bg-gray-100"
+                      skeletonClassName="w-12 h-12 rounded bg-gray-100"
+                      fallbackSrc="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center&auto=format&q=80"
+                    />
+                  </div>
 
                   <div className="flex-1 min-w-0">
                     <h4 className="font-medium text-sm truncate">
