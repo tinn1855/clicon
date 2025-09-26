@@ -1,20 +1,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, User, Search, MapPin, Phone, ChevronDown } from 'lucide-react';
+import { Menu, Search, MapPin, Phone, ChevronDown } from 'lucide-react';
 import { Logo } from '../atoms/Logo';
 import { SearchBar } from '@/components/molecules';
 import { WishlistQuickView, CartQuickView } from '@/components/molecules';
+import { UserProfile } from '@/components/UserProfile';
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../atoms';
 import { cn } from '@/lib/utils';
-import { useAuthStore } from '@/store';
 
 interface HeaderProps {
   className?: string;
@@ -32,14 +30,9 @@ const categories = [
 ];
 
 export const Header: React.FC<HeaderProps> = ({ className }) => {
-  const { user, isAuthenticated, logout } = useAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = React.useState(false);
   const navigate = useNavigate();
-
-  const handleSignIn = () => {
-    navigate('/signin');
-  };
 
   const handleSearch = (query: string) => {
     if (query.trim()) {
@@ -49,10 +42,6 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
     }
     // Close mobile search after searching
     setIsMobileSearchOpen(false);
-  };
-
-  const handleSignUp = () => {
-    navigate('/signup');
   };
 
   return (
@@ -135,48 +124,8 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               <Search className="h-5 w-5" />
             </Button>
 
-            {/* User Account */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 px-2 sm:px-3"
-                >
-                  <User className="h-4 w-4 sm:h-5 sm:w-5" />
-                  <div className="hidden sm:block text-left">
-                    <div className="text-xs text-muted-foreground">Account</div>
-                    <div className="text-sm font-medium">
-                      {isAuthenticated ? user?.firstName : 'Sign In'}
-                    </div>
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {isAuthenticated ? (
-                  <>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Orders</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout}>
-                      Sign Out
-                    </DropdownMenuItem>
-                  </>
-                ) : (
-                  <>
-                    <DropdownMenuItem onClick={handleSignIn}>
-                      Sign In
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleSignUp}>
-                      Create Account
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* User Profile */}
+            <UserProfile />
 
             {/* Wishlist */}
             <WishlistQuickView className="relative px-2 sm:px-3" />

@@ -11,7 +11,7 @@ import {
   Separator,
 } from '@/components/atoms';
 import { Price } from '@/components/atoms/Price';
-import { useCartStore } from '@/store';
+import { useCartStore, useAuthStore } from '@/store';
 import {
   ArrowLeft,
   Shield,
@@ -19,11 +19,13 @@ import {
   Smartphone,
   Truck,
   CheckCircle,
+  User,
 } from 'lucide-react';
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { cart, clearCart } = useCartStore();
+  const { user, isAuthenticated } = useAuthStore();
   const [showSuccess, setShowSuccess] = useState(false);
   const [saveInfo, setSaveInfo] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -40,11 +42,25 @@ export default function CheckoutPage() {
   const tax = cart.subtotal * 0.1;
   const total = cart.subtotal + shippingCost + tax;
 
-  // Load saved info from localStorage
+  // Load saved info from localStorage or user data
   const getSavedInfo = () => {
     try {
       const saved = localStorage.getItem('checkoutInfo');
-      return saved ? JSON.parse(saved) : {};
+      const savedData = saved ? JSON.parse(saved) : {};
+
+      // If user is authenticated, use their info as default
+      if (isAuthenticated && user) {
+        return {
+          firstName: user.firstName || savedData.firstName || '',
+          lastName: user.lastName || savedData.lastName || '',
+          email: user.email || savedData.email || '',
+          address: savedData.address || '',
+          city: savedData.city || '',
+          zipCode: savedData.zipCode || '',
+        };
+      }
+
+      return savedData;
     } catch {
       return {};
     }
@@ -213,6 +229,25 @@ export default function CheckoutPage() {
         <Heading1 className="mb-6 sm:mb-8 text-center sm:text-left">
           Checkout
         </Heading1>
+
+        {/* User Info Display */}
+        {isAuthenticated && user && (
+          <div className="mb-6">
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center">
+                  <User className="h-5 w-5 text-green-600 mr-3" />
+                  <div>
+                    <p className="text-sm text-gray-600">Signed in as:</p>
+                    <p className="font-medium">
+                      {user.firstName} {user.lastName} ({user.email})
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
           <div className="xl:col-span-2 order-2 xl:order-1">

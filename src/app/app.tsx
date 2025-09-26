@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { ScrollToTopButton } from '@/components/molecules/ScrollToTopButton';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 // Pages - Will create these next
 const HomePage = React.lazy(() => import('../pages/HomePage'));
@@ -46,7 +47,14 @@ export function App() {
 
           {/* Shopping Flow */}
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/track-order" element={<TrackOrderPage />} />
 
           {/* Authentication */}
