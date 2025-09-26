@@ -40,8 +40,7 @@ export default function CartPage() {
   };
 
   const handleCheckout = () => {
-    // TODO: Navigate to checkout page
-    console.log('Proceeding to checkout...');
+    navigate('/checkout');
   };
 
   if (cart.items.length === 0) {
