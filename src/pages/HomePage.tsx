@@ -216,9 +216,12 @@ export default function HomePage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500"
+                className="flex-1 px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500 outline-none"
               />
-              <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3">
+              <Button
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3"
+              >
                 Subscribe
               </Button>
             </div>

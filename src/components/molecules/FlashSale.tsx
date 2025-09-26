@@ -90,13 +90,6 @@ export const FlashSale: React.FC<FlashSaleProps> = ({ endTime, className }) => {
               <div className="text-xs text-yellow-800 mt-1">SEC</div>
             </div>
           </div>
-
-          <Button
-            variant="outline"
-            className="bg-white text-yellow-900 border-yellow-600 hover:bg-yellow-50 w-full"
-          >
-            Shop Now
-          </Button>
         </div>
 
         {/* Desktop/Tablet Layout */}
@@ -148,13 +141,6 @@ export const FlashSale: React.FC<FlashSaleProps> = ({ endTime, className }) => {
               <div className="text-xs text-yellow-800 mt-1">SECS</div>
             </div>
           </div>
-
-          <Button
-            variant="outline"
-            className="bg-white text-yellow-900 border-yellow-600 hover:bg-yellow-50"
-          >
-            Shop Now
-          </Button>
         </div>
       </CardContent>
     </Card>

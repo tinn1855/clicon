@@ -38,7 +38,7 @@ const heroSlides: HeroBannerSlide[] = [
     description:
       'Discover amazing deals on the latest smartphones, laptops, and accessories. Limited time offer!',
     backgroundImage:
-      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     primaryCTA: {
       text: 'Shop Now',
       action: '/shop',
@@ -105,7 +105,7 @@ export const HeroBannerSlider: React.FC = () => {
         <CarouselContent>
           {heroSlides.map((slide) => (
             <CarouselItem key={slide.id}>
-              <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-lg">
+              <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
                 {/* Background Image with Overlay */}
                 <div
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -187,7 +187,7 @@ export const HeroBannerSlider: React.FC = () => {
                               slide.secondaryCTA &&
                               handleCTAClick(slide.secondaryCTA.action)
                             }
-                            className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg"
+                            className="border-white  hover:bg-white text-black px-8 py-3 text-lg"
                           >
                             {slide.secondaryCTA.text}
                           </Button>

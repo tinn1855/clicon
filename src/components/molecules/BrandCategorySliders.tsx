@@ -306,18 +306,6 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
           <CarouselNext className="right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:flex" />
         </Carousel>
       </div>
-
-      {/* Auto-scroll indicator */}
-      <div className="text-center mt-4">
-        <p className="text-xs text-gray-400 flex items-center justify-center gap-2">
-          <div
-            className={`w-2 h-2 bg-primary rounded-full ${
-              isHovered ? 'opacity-50' : 'animate-pulse'
-            } transition-all duration-300`}
-          ></div>
-          {isHovered ? 'Paused' : 'Auto-scrolling'} • Hover to pause
-        </p>
-      </div>
     </div>
   );
 };

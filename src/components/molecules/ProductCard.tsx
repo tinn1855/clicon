@@ -39,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Card
       className={cn(
-        'group relative overflow-hidden transition-all duration-300 hover:shadow-lg',
+        'group relative overflow-hidden transition-all duration-300 hover:shadow-lg h-full flex flex-col',
         variant === 'compact' && 'max-w-sm',
         variant === 'featured' && 'max-w-md',
         'transform-gpu',
@@ -51,7 +51,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* Image Container */}
       <div
-        className="relative aspect-square overflow-hidden bg-gray-50"
+        className="relative aspect-square overflow-hidden bg-gray-50 flex-shrink-0"
         style={{ contain: 'layout' }}
       >
         <Link to={`/product/${product.id}`}>
@@ -139,8 +139,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Product Info */}
-      <CardContent className="p-3 sm:p-4">
-        <div className="space-y-1 sm:space-y-2">
+      <CardContent className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
+        <div className="space-y-1 sm:space-y-2 flex-1">
           {/* Category Badge */}
           <div className="flex items-center justify-between">
             <Link to={`/category/${product.category.toLowerCase()}`}>
@@ -155,27 +155,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           {/* Product Name */}
           <Link to={`/product/${product.id}`}>
-            <h3 className="font-medium line-clamp-2 text-sm sm:text-base leading-tight hover:text-primary transition-colors cursor-pointer">
+            <h3 className="font-medium line-clamp-2 text-sm sm:text-base leading-tight hover:text-primary transition-colors cursor-pointer min-h-[2.5rem] flex items-start">
               {product.name}
             </h3>
           </Link>
 
           {/* Rating */}
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 mt-auto">
             <StarRating rating={product.rating} size="sm" />
             <span className="text-xs text-muted-foreground">
               ({product.reviewCount})
             </span>
           </div>
+        </div>
 
-          {/* Price */}
-          <div className="pt-1">
-            <Price
-              price={product.price}
-              originalPrice={product.originalPrice}
-              size="sm"
-            />
-          </div>
+        {/* Price */}
+        <div className="pt-2 mt-auto">
+          <Price
+            price={product.price}
+            originalPrice={product.originalPrice}
+            size="sm"
+          />
         </div>
       </CardContent>
     </Card>
