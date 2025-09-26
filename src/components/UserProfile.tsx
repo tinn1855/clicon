@@ -65,9 +65,9 @@ export const UserProfile: React.FC = () => {
           <span>Wishlist</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => navigate('/track-order')}>
+        <DropdownMenuItem onClick={() => navigate('/order-history')}>
           <Package className="mr-2 h-4 w-4" />
-          <span>Orders</span>
+          <span>Order History</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

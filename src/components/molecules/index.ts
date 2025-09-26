@@ -9,6 +9,19 @@ export { FlashSale } from './FlashSale';
 export { ProductGallery } from './ProductGallery';
 export { ProductInfo } from './ProductInfo';
 export { ProductOptions } from './ProductOptions';
+
+// New slider components
+export { HeroBannerSlider } from './HeroBannerSlider';
+export {
+  ProductCarousel,
+  FeaturedProductsCarousel,
+  BestSellerCarousel,
+  NewArrivalsCarousel,
+  DealsCarousel,
+} from './ProductCarousel';
+export { TestimonialsSlider } from './TestimonialsSlider';
+export { BrandCarousel, CategoryCarousel } from './BrandCategorySliders';
+
 export {
   WishlistButton,
   WishlistIconButton,

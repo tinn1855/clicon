@@ -3,3 +3,4 @@ export { useCartStore } from './cartStore';
 export { useWishlistStore } from './wishlistStore';
 export { useAuthStore } from './authStore';
 export { useProductStore } from './productStore';
+export { useOrderStore } from './orderStore';

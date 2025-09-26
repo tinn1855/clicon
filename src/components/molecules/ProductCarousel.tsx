@@ -1,0 +1,194 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { Button, Heading2 } from '@/components/atoms';
+import { ProductCard } from '@/components/molecules';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Star, TrendingUp, Zap, Award } from 'lucide-react';
+import { Product } from '@/types';
+
+interface ProductCarouselProps {
+  title: string;
+  products: Product[];
+  variant?: 'featured' | 'bestseller' | 'new' | 'deals';
+  viewAllLink?: string;
+  className?: string;
+}
+
+const variantConfig = {
+  featured: {
+    icon: Star,
+    badge: 'Featured',
+    badgeColor: 'bg-yellow-500',
+    titleColor: 'text-yellow-600',
+  },
+  bestseller: {
+    icon: TrendingUp,
+    badge: 'Best Seller',
+    badgeColor: 'bg-green-500',
+    titleColor: 'text-green-600',
+  },
+  new: {
+    icon: Zap,
+    badge: 'New Arrivals',
+    badgeColor: 'bg-blue-500',
+    titleColor: 'text-blue-600',
+  },
+  deals: {
+    icon: Award,
+    badge: 'Hot Deals',
+    badgeColor: 'bg-red-500',
+    titleColor: 'text-red-600',
+  },
+};
+
+export const ProductCarousel: React.FC<ProductCarouselProps> = ({
+  title,
+  products,
+  variant = 'featured',
+  viewAllLink,
+  className = '',
+}) => {
+  const navigate = useNavigate();
+  const config = variantConfig[variant];
+  const IconComponent = config.icon;
+
+  const handleViewAll = () => {
+    if (viewAllLink) {
+      navigate(viewAllLink);
+    }
+  };
+
+  return (
+    <div className={`w-full ${className}`}>
+      {/* Section Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center space-x-3">
+          <div className={`p-2 rounded-full ${config.badgeColor}`}>
+            <IconComponent className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <Heading2
+              className={`text-2xl sm:text-3xl font-bold ${config.titleColor}`}
+            >
+              {title}
+            </Heading2>
+            <Badge
+              variant="secondary"
+              className={`${config.badgeColor} text-white`}
+            >
+              {config.badge}
+            </Badge>
+          </div>
+        </div>
+
+        {viewAllLink && (
+          <Button
+            variant="outline"
+            onClick={handleViewAll}
+            className="hidden sm:flex items-center"
+          >
+            View All
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        )}
+      </div>
+
+      {/* Products Carousel */}
+      <Carousel
+        opts={{
+          align: 'start',
+          loop: false,
+        }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-2 md:-ml-4">
+          {products.map((product) => (
+            <CarouselItem
+              key={product.id}
+              className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+            >
+              <div className="h-full">
+                <ProductCard product={product} />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        <CarouselPrevious className="left-0 -translate-x-4 bg-white shadow-md border" />
+        <CarouselNext className="right-0 translate-x-4 bg-white shadow-md border" />
+      </Carousel>
+
+      {/* Mobile View All Button */}
+      {viewAllLink && (
+        <div className="flex justify-center mt-6 sm:hidden">
+          <Button onClick={handleViewAll} className="w-full max-w-xs">
+            View All Products
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Specialized Product Carousels
+export const FeaturedProductsCarousel: React.FC<{
+  products: Product[];
+  className?: string;
+}> = ({ products, className }) => (
+  <ProductCarousel
+    title="Featured Products"
+    products={products}
+    variant="featured"
+    viewAllLink="/shop?featured=true"
+    className={className}
+  />
+);
+
+export const BestSellerCarousel: React.FC<{
+  products: Product[];
+  className?: string;
+}> = ({ products, className }) => (
+  <ProductCarousel
+    title="Best Sellers"
+    products={products}
+    variant="bestseller"
+    viewAllLink="/shop?sort=bestseller"
+    className={className}
+  />
+);
+
+export const NewArrivalsCarousel: React.FC<{
+  products: Product[];
+  className?: string;
+}> = ({ products, className }) => (
+  <ProductCarousel
+    title="New Arrivals"
+    products={products}
+    variant="new"
+    viewAllLink="/shop?sort=newest"
+    className={className}
+  />
+);
+
+export const DealsCarousel: React.FC<{
+  products: Product[];
+  className?: string;
+}> = ({ products, className }) => (
+  <ProductCarousel
+    title="Hot Deals"
+    products={products}
+    variant="deals"
+    viewAllLink="/shop?deals=true"
+    className={className}
+  />
+);
+
+export default ProductCarousel;

@@ -22,6 +22,8 @@ const TrackOrderPage = React.lazy(() => import('../pages/TrackOrderPage'));
 const AboutPage = React.lazy(() => import('../pages/AboutPage'));
 const ContactPage = React.lazy(() => import('../pages/ContactPage'));
 const WishlistPage = React.lazy(() => import('../pages/WishlistPage'));
+const ProfilePage = React.lazy(() => import('../pages/ProfilePage'));
+const OrderHistoryPage = React.lazy(() => import('../pages/OrderHistoryPage'));
 
 export function App() {
   // Hook để scroll lên top khi chuyển trang
@@ -61,6 +63,24 @@ export function App() {
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+          {/* Protected User Pages */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-history"
+            element={
+              <ProtectedRoute>
+                <OrderHistoryPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Catch all route - 404 */}
           <Route

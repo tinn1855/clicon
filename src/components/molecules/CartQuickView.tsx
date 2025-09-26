@@ -229,18 +229,18 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
                 </Button>
               </Link>
 
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setIsOpen(false);
-                  // TODO: Navigate to checkout
-                  console.log('Proceeding to checkout...');
-                }}
-                className="w-full"
-                size="sm"
-              >
-                Checkout
-              </Button>
+              <Link to="/checkout">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  className="w-full"
+                  size="sm"
+                >
+                  Checkout
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
