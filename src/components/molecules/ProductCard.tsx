@@ -102,7 +102,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           className={cn(
             'absolute top-2 sm:top-3 right-2 sm:right-3 flex flex-col gap-1 sm:gap-2 transition-opacity duration-300',
             isHovered ? 'opacity-100' : 'opacity-0 sm:opacity-0',
-            'opacity-100 sm:opacity-0' // Always visible on mobile
+            'opacity-100 ' // Always visible on mobile
           )}
         >
           <WishlistIconButton

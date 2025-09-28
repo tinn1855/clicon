@@ -13,7 +13,10 @@ export const Heading1: React.FC<TypographyProps> = ({
   as: Component = 'h1',
 }) => (
   <Component
-    className={cn('text-4xl font-bold tracking-tight lg:text-5xl', className)}
+    className={cn(
+      'text-3xl sm:text-4xl font-bold tracking-tight lg:text-5xl',
+      className
+    )}
   >
     {children}
   </Component>

@@ -21,7 +21,6 @@ interface ProductOptionsProps {
 }
 
 // Mock size and color options - in real app, this would come from product data
-const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const COLORS = [
   { name: 'White', value: '#FFFFFF', available: true },
   { name: 'Black', value: '#000000', available: true },
@@ -36,7 +35,6 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
   isInWishlist,
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
   const [wishlistAnimation, setWishlistAnimation] = useState(false);
 
@@ -119,29 +117,6 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
         </div>
       </div>
 
-      {/* Size Selection */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
-          Size
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {SIZES.map((size) => (
-            <button
-              key={size}
-              onClick={() => setSelectedSize(size)}
-              className={cn(
-                'px-4 py-2 border rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105',
-                selectedSize === size
-                  ? 'border-blue-500 bg-blue-50 text-blue-600 ring-2 ring-blue-200'
-                  : 'border-gray-300 text-gray-700 hover:border-gray-400'
-              )}
-            >
-              {size}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Color Selection */}
       <div className="space-y-3">
         <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
@@ -202,7 +177,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
       <div className="space-y-3">
         <Button
           onClick={handleAddToCart}
-          disabled={!product.inStock || !selectedSize}
+          disabled={!product.inStock}
           className="w-full py-3 text-base font-medium transition-all duration-300 hover:scale-105"
         >
           <ShoppingCart className="w-5 h-5 mr-2" />
@@ -221,7 +196,7 @@ export const ProductOptions: React.FC<ProductOptionsProps> = ({
           >
             <Heart
               className={cn(
-                'w-4 h-4 mr-2 transition-all duration-300',
+                'w-4 h-4  transition-all duration-300',
                 isInWishlist && 'fill-current'
               )}
             />

@@ -74,10 +74,10 @@ export default function CartPage() {
     <PageLayout>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
+        <div className="sm:flex items-center justify-between mb-8">
+          <div className="sm:flex items-center gap-4">
             <Button variant="ghost" onClick={() => navigate(-1)}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowLeft className="h-4 w-4" />
               Back
             </Button>
             <Heading1>Shopping Cart ({cart.itemCount} items)</Heading1>
@@ -87,9 +87,9 @@ export default function CartPage() {
             <Button
               variant="outline"
               onClick={handleClearCart}
-              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+              className="text-red-600 hover:text-red-700 hover:bg-red-50 mt-4 sm:mt-0"
             >
-              <Trash2 className="h-4 w-4 mr-2" />
+              <Trash2 className="h-4 w-4" />
               Clear Cart
             </Button>
           )}
@@ -114,7 +114,7 @@ export default function CartPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="font-semibold text-lg truncate">
+                        <h3 className="font-semibold text-lg truncate max-w-[200px] sm:max-w-none">
                           {item.product.name}
                         </h3>
                         <p className="text-gray-600 text-sm">
@@ -145,7 +145,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Price and Quantity */}
-                    <div className="flex justify-between items-center">
+                    <div className="sm:flex justify-between items-center">
                       <div className="flex items-center gap-4">
                         <QuantitySelector
                           value={item.quantity}

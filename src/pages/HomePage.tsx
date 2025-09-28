@@ -88,33 +88,36 @@ export default function HomePage() {
   return (
     <PageLayout>
       {/* Hero Banner Slider */}
-      <section className="mb-8 lg:mb-12">
+      <section className="mb-6 sm:mb-8 lg:mb-12">
         <HeroBannerSlider />
       </section>
 
       {/* Service Features */}
-      <section className="mb-12 lg:mb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="mb-8 sm:mb-12 lg:mb-16">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
+          <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {serviceFeatures.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
                 <Card
                   key={index}
-                  className="text-center hover:shadow-md transition-shadow duration-300"
+                  className="text-center hover:shadow-md transition-shadow duration-300 min-w-0 w-full"
                 >
-                  <CardContent className="p-6">
+                  <CardContent className="p-3 sm:p-4 lg:p-6">
                     <div
-                      className={`inline-flex p-3 rounded-full ${feature.bgColor} mb-4`}
+                      className={`inline-flex p-2 sm:p-3 rounded-full ${feature.bgColor} mb-3 sm:mb-4`}
                     >
                       <IconComponent
-                        className={`h-6 w-6 ${feature.iconColor}`}
+                        className={`h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 ${feature.iconColor} flex-shrink-0`}
                       />
                     </div>
-                    <Heading3 className="font-semibold mb-2">
+                    <Heading3 className="font-semibold mb-2 text-sm sm:text-base lg:text-lg">
                       {feature.title}
                     </Heading3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                       {feature.description}
                     </p>
                   </CardContent>
@@ -126,31 +129,41 @@ export default function HomePage() {
       </section>
 
       {/* Categories Carousel */}
-      <section className="mb-12 lg:mb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="mb-8 sm:mb-12 lg:mb-16">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
           <CategoryCarousel />
         </div>
       </section>
 
       {/* Flash Sale Section */}
       {dealsProducts.length > 0 && (
-        <section className="mb-12 lg:mb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-r from-red-500 to-pink-600 rounded-lg p-6 lg:p-8 text-white">
-              <div className="flex flex-col lg:flex-row items-center justify-between">
-                <div className="text-center lg:text-left mb-6 lg:mb-0">
-                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
-                    <Clock className="h-5 w-5" />
-                    <span className="font-semibold">Limited Time Offer</span>
+        <section className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
+            <div className="bg-gradient-to-r from-red-500 to-pink-600 rounded-lg p-4 sm:p-6 lg:p-8 text-white">
+              <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div className="text-center lg:text-left min-w-0 flex-1">
+                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-2 sm:mb-3">
+                    <Clock className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <span className="font-semibold text-sm sm:text-base">
+                      Limited Time Offer
+                    </span>
                   </div>
-                  <Heading2 className="text-2xl lg:text-3xl font-bold text-white mb-2">
+                  <Heading2 className="text-base sm:text-lg lg:text-2xl xl:text-3xl font-bold text-white mb-1 sm:mb-2">
                     Flash Sale - Up to 70% Off
                   </Heading2>
-                  <p className="text-red-100 mb-4">
+                  <p className="text-red-100 text-xs sm:text-sm mb-2 sm:mb-4">
                     Hurry! These deals won't last long
                   </p>
                 </div>
-                <FlashSale endTime={flashSaleEndTime} />
+                <div className="flex-shrink-0 flex justify-center lg:justify-end">
+                  <FlashSale endTime={flashSaleEndTime} />
+                </div>
               </div>
             </div>
           </div>
@@ -159,8 +172,11 @@ export default function HomePage() {
 
       {/* Deals Carousel */}
       {dealsProducts.length > 0 && (
-        <section className="mb-12 lg:mb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
             <DealsCarousel products={dealsProducts} />
           </div>
         </section>
@@ -168,8 +184,11 @@ export default function HomePage() {
 
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="mb-12 lg:mb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
             <FeaturedProductsCarousel products={featuredProducts} />
           </div>
         </section>
@@ -177,50 +196,62 @@ export default function HomePage() {
 
       {/* Best Sellers */}
       {bestSellerProducts.length > 0 && (
-        <section className="mb-12 lg:mb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
             <BestSellerCarousel products={bestSellerProducts} />
           </div>
         </section>
       )}
 
       {/* Brand Carousel */}
-      <section className="mb-12 lg:mb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="mb-8 sm:mb-12 lg:mb-16">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
           <BrandCarousel />
         </div>
       </section>
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <section className="mb-12 lg:mb-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+            style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+          >
             <NewArrivalsCarousel products={newArrivals} />
           </div>
         </section>
       )}
 
       {/* Newsletter Signup */}
-      <section className="mb-12 lg:mb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 lg:p-12 text-white text-center">
-            <Gift className="h-12 w-12 mx-auto mb-4" />
-            <Heading2 className="text-2xl lg:text-3xl font-bold mb-4">
+      <section className="mb-8 sm:mb-12 lg:mb-16">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-4 sm:p-6 lg:p-8 xl:p-12 text-white text-center">
+            <Gift className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 xl:h-12 xl:w-12 mx-auto mb-3 sm:mb-4 flex-shrink-0" />
+            <Heading2 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold mb-3 sm:mb-4">
               Stay in the Loop
             </Heading2>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-xs sm:text-sm lg:text-base leading-relaxed">
               Subscribe to our newsletter and be the first to know about new
               products, exclusive deals, and tech insights.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500 outline-none"
+                className="flex-1 px-3 py-2 sm:px-4 text-sm sm:text-base rounded-lg text-gray-900 placeholder-gray-500 outline-none min-w-0"
               />
               <Button
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base whitespace-nowrap"
               >
                 Subscribe
               </Button>
@@ -230,28 +261,35 @@ export default function HomePage() {
       </section>
 
       {/* Customer Testimonials */}
-      <section className="mb-12 lg:mb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="mb-8 sm:mb-12 lg:mb-16">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
           <TestimonialsSlider />
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="mb-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-50 rounded-lg p-8 text-center">
-            <Star className="h-12 w-12 mx-auto text-yellow-500 mb-4" />
-            <Heading2 className="text-2xl lg:text-3xl font-bold mb-4">
+      <section className="mb-6 sm:mb-8">
+        <div
+          className="w-full min-w-[375px] px-3 sm:px-4 lg:px-8 mx-auto"
+          style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+        >
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6 lg:p-8 text-center">
+            <Star className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 xl:h-12 xl:w-12 mx-auto text-yellow-500 mb-3 sm:mb-4 flex-shrink-0" />
+            <Heading2 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold mb-3 sm:mb-4">
               Ready to Explore?
             </Heading2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto text-xs sm:text-sm lg:text-base leading-relaxed">
               Discover thousands of products from the world's best brands.
               Quality guaranteed, fast shipping, and excellent customer service.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
               <Button
                 size="lg"
                 onClick={() => (window.location.href = '/shop')}
+                className="text-sm sm:text-base"
               >
                 Start Shopping
               </Button>
@@ -259,6 +297,7 @@ export default function HomePage() {
                 variant="outline"
                 size="lg"
                 onClick={() => (window.location.href = '/about')}
+                className="text-sm sm:text-base"
               >
                 Learn More
               </Button>

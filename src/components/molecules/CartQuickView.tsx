@@ -45,15 +45,19 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
     return (
       <div className={cn('relative', className)} ref={dropdownRef}>
         <button onClick={() => setIsOpen(!isOpen)}>
-          <Button variant="ghost" size="sm" className="relative px-2 sm:px-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="relative px-1 min-[375px]:px-2 sm:px-3"
+          >
             <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
             <span className="hidden lg:block ml-2">Cart</span>
           </Button>
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-            <div className="p-6 text-center">
+          <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] max-w-[320px] min-[375px]:max-w-[340px] sm:max-w-[380px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 mr-2">
+            <div className="p-4 min-[375px]:p-6 text-center">
               <ShoppingBag className="h-12 w-12 text-gray-300 mx-auto mb-4" />
               <h3 className="font-semibold text-gray-900 mb-2">
                 Your cart is empty
@@ -76,7 +80,11 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
   return (
     <div className={cn('relative', className)} ref={dropdownRef}>
       <button onClick={() => setIsOpen(!isOpen)}>
-        <Button variant="ghost" size="sm" className="relative px-2 sm:px-3">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative px-1 min-[375px]:px-2 sm:px-3"
+        >
           <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
           {cart.itemCount > 0 && (
             <span className="bg-blue-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-medium absolute -top-1 -right-1">
@@ -88,8 +96,8 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-96 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-          <div className="p-4">
+        <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] max-w-[320px] min-[375px]:max-w-[360px] sm:max-w-[400px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 mr-2">
+          <div className="p-3 min-[375px]:p-4">
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-lg">
@@ -108,42 +116,45 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
             </div>
 
             {/* Cart Items */}
-            <div className="space-y-3 max-h-64 overflow-y-auto">
+            <div className="space-y-2 sm:space-y-3 max-h-64 overflow-y-auto">
               {cart.items.slice(0, 3).map((item) => (
-                <div key={item.id} className="flex gap-3 p-3 rounded-lg border">
+                <div
+                  key={item.id}
+                  className="flex gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border"
+                >
                   {/* Product Image */}
-                  <div className="w-12 h-12 flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
                     <ImageWithSkeleton
                       src={item.product.images?.[0] || ''}
                       alt={item.product.name}
                       className="w-full h-full object-cover rounded bg-gray-100"
-                      skeletonClassName="w-12 h-12 rounded bg-gray-100"
+                      skeletonClassName="w-10 h-10 sm:w-12 sm:h-12 rounded bg-gray-100"
                       fallbackSrc="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center&auto=format&q=80"
                     />
                   </div>
 
                   {/* Product Details */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-sm truncate">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <h4 className="font-medium text-xs sm:text-sm truncate w-full">
                       {item.product.name}
                     </h4>
-                    <p className="text-gray-600 text-xs">
+                    <p className="text-gray-600 text-xs truncate w-full">
                       {item.product.brand}
                     </p>
 
-                    {/* Quantity and Price */}
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-2">
+                    {/* Quantity and Price - Stack vertically on very small screens */}
+                    <div className="flex flex-col space-y-1 mt-1 sm:mt-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                      <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                         <button
                           onClick={() =>
                             handleQuantityChange(item.id, item.quantity - 1)
                           }
                           disabled={item.quantity <= 1}
-                          className="h-6 w-6 rounded border hover:bg-gray-50 flex items-center justify-center disabled:opacity-50"
+                          className="h-5 w-5 sm:h-6 sm:w-6 rounded border hover:bg-gray-50 flex items-center justify-center disabled:opacity-50"
                         >
-                          <Minus className="h-3 w-3" />
+                          <Minus className="h-2 w-2 sm:h-3 sm:w-3" />
                         </button>
-                        <span className="text-sm font-medium w-8 text-center">
+                        <span className="text-xs sm:text-sm font-medium w-6 sm:w-8 text-center">
                           {item.quantity}
                         </span>
                         <button
@@ -151,16 +162,16 @@ export const CartQuickView: React.FC<CartQuickViewProps> = ({ className }) => {
                             handleQuantityChange(item.id, item.quantity + 1)
                           }
                           disabled={item.quantity >= item.product.stockQuantity}
-                          className="h-6 w-6 rounded border hover:bg-gray-50 flex items-center justify-center disabled:opacity-50"
+                          className="h-5 w-5 sm:h-6 sm:w-6 rounded border hover:bg-gray-50 flex items-center justify-center disabled:opacity-50"
                         >
-                          <Plus className="h-3 w-3" />
+                          <Plus className="h-2 w-2 sm:h-3 sm:w-3" />
                         </button>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                         <Price
                           price={item.product.price * item.quantity}
-                          className="font-medium text-sm"
+                          className="text-xs sm:text-sm font-medium"
                         />
                         <button
                           onClick={() => handleRemoveItem(item.id)}

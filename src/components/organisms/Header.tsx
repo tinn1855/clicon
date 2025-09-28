@@ -113,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1 min-[375px]:gap-2 sm:gap-4">
             {/* Search - Mobile */}
             <Button
               variant="ghost"
@@ -128,10 +128,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             <UserProfile />
 
             {/* Wishlist */}
-            <WishlistQuickView className="relative px-2 sm:px-3" />
+            <WishlistQuickView className="relative" />
 
             {/* Shopping Cart Quick View */}
-            <CartQuickView className="px-2 sm:px-3" />
+            <CartQuickView />
           </div>
         </div>
       </div>

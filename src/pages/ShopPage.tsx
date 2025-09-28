@@ -5,6 +5,7 @@ import { useDebounce } from '@/hooks';
 import { ProductFilters, ProductSort } from '@/services/mockAPI';
 import { ProductCard } from '@/components/molecules';
 import { PageLayout } from '@/components/templates';
+import { ShadcnPagination } from '@/components/ShadcnPagination';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -60,12 +61,11 @@ const ShopPage: React.FC = () => {
     const pageParam = searchParams.get('page');
     return pageParam ? parseInt(pageParam, 10) : 1;
   });
+  const [itemsPerPage, setItemsPerPage] = useState(20);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
-  const itemsPerPage = 20;
 
   // Sync URL parameters on mount and when they change
   useEffect(() => {
@@ -131,6 +131,7 @@ const ShopPage: React.FC = () => {
     inStockOnly,
     sortOption,
     currentPage,
+    itemsPerPage,
     searchProducts,
   ]);
 
@@ -218,6 +219,19 @@ const ShopPage: React.FC = () => {
     } else {
       newSearchParams.delete('page');
     }
+    setSearchParams(newSearchParams);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Handle page size change
+  const handlePageSizeChange = (size: number) => {
+    setItemsPerPage(size);
+    setCurrentPage(1);
+
+    // Update URL parameters
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete('page');
     setSearchParams(newSearchParams);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -628,56 +642,16 @@ const ShopPage: React.FC = () => {
               )}
 
               {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="mt-8 flex justify-center">
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={currentPage <= 1}
-                    >
-                      Previous
-                    </Button>
-
-                    {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
-                      const page = i + 1;
-                      return (
-                        <Button
-                          key={page}
-                          variant={currentPage === page ? 'default' : 'outline'}
-                          onClick={() => handlePageChange(page)}
-                          className="w-10"
-                        >
-                          {page}
-                        </Button>
-                      );
-                    })}
-
-                    {totalPages > 5 && (
-                      <>
-                        <span className="px-2">...</span>
-                        <Button
-                          variant={
-                            currentPage === totalPages ? 'default' : 'outline'
-                          }
-                          onClick={() => handlePageChange(totalPages)}
-                          className="w-10"
-                        >
-                          {totalPages}
-                        </Button>
-                      </>
-                    )}
-
-                    <Button
-                      variant="outline"
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={currentPage >= totalPages}
-                    >
-                      Next
-                    </Button>
-                  </div>
-                </div>
-              )}
+              <ShadcnPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+                pageSize={itemsPerPage}
+                onPageSizeChange={handlePageSizeChange}
+                totalCount={totalProducts}
+                isLoading={isLoading}
+                className="mt-8"
+              />
             </div>
           </div>
         </div>

@@ -66,22 +66,26 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
   };
 
   return (
-    <div className={`w-full ${className}`}>
+    <div
+      className={`w-full min-w-[375px] max-w-full overflow-hidden ${className}`}
+    >
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className={`p-2 rounded-full ${config.badgeColor}`}>
-            <IconComponent className="h-5 w-5 text-white" />
+      <div className="flex items-center justify-between mb-4 sm:mb-6 gap-2 px-1">
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+          <div
+            className={`p-1.5 sm:p-2 rounded-full ${config.badgeColor} flex-shrink-0`}
+          >
+            <IconComponent className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <Heading2
-              className={`text-2xl sm:text-3xl font-bold ${config.titleColor}`}
+              className={`text-base sm:text-lg lg:text-2xl xl:text-3xl font-bold ${config.titleColor} truncate`}
             >
               {title}
             </Heading2>
             <Badge
               variant="secondary"
-              className={`${config.badgeColor} text-white`}
+              className={`${config.badgeColor} text-white text-xs hidden sm:inline-flex mt-1`}
             >
               {config.badge}
             </Badge>
@@ -92,10 +96,11 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
           <Button
             variant="outline"
             onClick={handleViewAll}
-            className="hidden sm:flex items-center"
+            className="hidden sm:flex items-center flex-shrink-0 text-xs sm:text-sm px-3 py-1.5"
           >
-            View All
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <span className="hidden md:inline">View All</span>
+            <span className="md:hidden">All</span>
+            <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
         )}
       </div>
@@ -106,34 +111,37 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
           align: 'start',
           loop: false,
         }}
-        className="w-full"
+        className="w-full max-w-full"
       >
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className="-ml-1 sm:-ml-2 lg:-ml-4">
           {products.map((product) => (
             <CarouselItem
               key={product.id}
-              className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+              className="pl-1 sm:pl-2 lg:pl-4 basis-full min-[375px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
             >
-              <div className="h-full flex flex-col">
+              <div className="h-full flex flex-col min-w-0 max-w-full">
                 <ProductCard
                   product={product}
-                  className="flex-1 flex flex-col"
+                  className="flex-1 flex flex-col w-full min-w-0 max-w-full"
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className="left-0 -translate-x-4 bg-white shadow-md border" />
-        <CarouselNext className="right-0 translate-x-4 bg-white shadow-md border" />
+        <CarouselPrevious className="left-0 -translate-x-2 sm:-translate-x-4 bg-white shadow-md border hidden lg:flex" />
+        <CarouselNext className="right-0 translate-x-2 sm:translate-x-4 bg-white shadow-md border hidden lg:flex" />
       </Carousel>
 
       {/* Mobile View All Button */}
       {viewAllLink && (
-        <div className="flex justify-center mt-6 sm:hidden">
-          <Button onClick={handleViewAll} className="w-full max-w-xs">
+        <div className="flex justify-center mt-4 sm:mt-6">
+          <Button
+            onClick={handleViewAll}
+            className="w-full max-w-xs sm:hidden text-sm px-4 py-2"
+          >
             View All Products
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-1 h-3 w-3" />
           </Button>
         </div>
       )}

@@ -2,6 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile responsive fixes */
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    min-width: 375px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Container responsive overrides */
+@layer utilities {
+  .container-responsive {
+    @apply w-full max-w-full px-3 sm:px-4 lg:px-8;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 375px;
+    overflow-x: hidden;
+  }
+
+  /* Prevent horizontal scroll on very small screens */
+  @media (max-width: 374px) {
+    .container,
+    .container-responsive {
+      padding-left: 0.75rem; /* 12px */
+      padding-right: 0.75rem; /* 12px */
+      max-width: 100vw;
+      overflow-x: hidden;
+      min-width: 100%;
+    }
+
+    /* Force break long words */
+    .text-break {
+      word-break: break-word;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+
+    /* Smaller buttons on ultra small screens */
+    .btn-xs {
+      @apply px-2 py-1 text-xs;
+      min-width: auto;
+      max-width: 100%;
+    }
+
+    /* Fix flexbox on small screens */
+    .flex-responsive {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  /* Responsive breakpoints for carousels */
+  @media (min-width: 375px) {
+    .carousel-375 .basis-full {
+      flex-basis: 100%;
+    }
+  }
+
+  @media (min-width: 480px) {
+    .carousel-375 .basis-1\/2 {
+      flex-basis: 50%;
+    }
+  }
+
+  /* Additional responsive utilities */
+  .min-w-375 {
+    min-width: 375px;
+  }
+
+  .max-w-screen-safe {
+    max-width: calc(100vw - 1rem);
+  }
+
+  .overflow-x-safe {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Dropdown responsive positioning */
+  .dropdown-safe {
+    max-width: calc(100vw - 2rem);
+    right: 0;
+  }
+
+  @media (max-width: 374px) {
+    .dropdown-safe {
+      right: 0.5rem;
+      max-width: calc(100vw - 1rem);
+    }
+  }
+
+  /* Header actions responsive fixes */
+  .header-actions {
+    @apply flex items-center;
+    gap: 0.25rem; /* 4px */
+  }
+
+  @media (min-width: 375px) {
+    .header-actions {
+      gap: 0.5rem; /* 8px */
+    }
+  }
+
+  @media (min-width: 640px) {
+    .header-actions {
+      gap: 1rem; /* 16px */
+    }
+  }
+
+  /* Text truncation improvements */
+  .text-truncate-safe {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .dropdown-item-content {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dropdown-item-content h4,
+  .dropdown-item-content p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  /* Hide scrollbars */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+  /* Pagination improvements */
+  .pagination-container {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}
+
 /* Glassmorphism Utilities */
 
 /* Base glass effect */

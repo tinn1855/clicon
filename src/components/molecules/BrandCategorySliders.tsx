@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Carousel,
@@ -200,6 +200,65 @@ const categories: Category[] = [
   },
 ];
 
+// Brand Logo Component with fallback
+interface BrandLogoProps {
+  brand: Brand;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const BrandLogo: React.FC<BrandLogoProps> = ({ brand, className, style }) => {
+  const [hasError, setHasError] = React.useState(false);
+  const [useSecondFallback, setUseSecondFallback] = React.useState(false);
+
+  const handleImageError = () => {
+    if (!hasError) {
+      setHasError(true);
+    } else {
+      setUseSecondFallback(true);
+    }
+  };
+
+  // Generate a simple SVG fallback
+  const generateSvgFallback = (brandName: string) => {
+    const initials = brandName
+      .split(' ')
+      .map((word) => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+
+    const svgString = `
+      <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="40" fill="#666666"/>
+        <text x="60" y="25" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="14" font-weight="bold">${initials}</text>
+      </svg>
+    `;
+    return `data:image/svg+xml;base64,${btoa(svgString)}`;
+  };
+
+  if (useSecondFallback) {
+    return (
+      <div
+        className="w-full h-full bg-gray-300 rounded flex items-center justify-center text-gray-600 text-xs font-medium"
+        style={style}
+      >
+        {brand.name}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={hasError ? generateSvgFallback(brand.name) : brand.logo}
+      alt={brand.name}
+      className={className}
+      style={style}
+      onError={handleImageError}
+    />
+  );
+};
+
 // Brand Carousel Component
 interface BrandCarouselProps {
   className?: string;
@@ -232,13 +291,15 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
   const duplicatedBrands = [...brands, ...brands];
 
   return (
-    <div className={`w-full ${className}`}>
+    <div
+      className={`w-full min-w-[375px] max-w-full overflow-hidden ${className}`}
+    >
       {/* Section Header */}
-      <div className="text-center mb-8">
-        <Heading2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+      <div className="text-center mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-4">
+        <Heading2 className="text-base sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-2">
           {title}
         </Heading2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-gray-600 max-w-2xl mx-auto text-xs sm:text-sm lg:text-base">
           Shop from the world's most trusted and innovative technology brands
         </p>
       </div>
@@ -247,7 +308,7 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="group relative"
+        className="group relative px-1 sm:px-2"
       >
         <Carousel
           setApi={setApi}
@@ -257,41 +318,34 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
             skipSnaps: false,
             dragFree: true,
           }}
-          className="w-full"
+          className="w-full max-w-full"
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-1 sm:-ml-2 lg:-ml-4">
             {duplicatedBrands.map((brand, index) => (
               <CarouselItem
                 key={`${brand.id}-${index}`}
-                className="pl-2 md:pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+                className="pl-1 sm:pl-2 lg:pl-4 basis-1/2 min-[375px]:basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6 xl:basis-1/8"
               >
                 <div className="group/item cursor-pointer">
                   <Card className="border-0 shadow-none hover:shadow-md transition-all duration-300 group-hover/item:scale-105">
-                    <CardContent className="p-4 text-center">
+                    <CardContent className="p-1.5 sm:p-2 lg:p-3 text-center">
                       {/* Fixed size container for logos */}
-                      <div className="h-16 w-full flex items-center justify-center mb-3 bg-gray-50 rounded-lg group-hover/item:bg-white transition-colors duration-300">
-                        <img
-                          src={brand.logo}
-                          alt={brand.name}
-                          className="max-h-10 max-w-[80%] object-contain grayscale group-hover/item:grayscale-0 transition-all duration-300"
+                      <div className="h-10 sm:h-12 lg:h-14 w-full flex items-center justify-center mb-1.5 sm:mb-2 bg-gray-50 rounded-lg group-hover/item:bg-white transition-colors duration-300">
+                        <BrandLogo
+                          brand={brand}
+                          className="max-h-6 sm:max-h-8 lg:max-h-9 max-w-[85%] object-contain grayscale group-hover/item:grayscale-0 transition-all duration-300"
                           style={{
                             width: 'auto',
                             height: 'auto',
-                            maxWidth: '80%',
-                            maxHeight: '2.5rem', // 40px
-                          }}
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = `https://via.placeholder.com/120x40/666666/FFFFFF?text=${encodeURIComponent(
-                              brand.name
-                            )}`;
+                            maxWidth: '85%',
+                            maxHeight: '1.5rem', // 24px on mobile, responsive up
                           }}
                         />
                       </div>
-                      <h3 className="font-medium text-sm text-gray-900 group-hover/item:text-primary transition-colors duration-300 truncate">
+                      <h3 className="font-medium text-xs sm:text-sm text-gray-900 group-hover/item:text-primary transition-colors duration-300 truncate">
                         {brand.name}
                       </h3>
-                      <p className="text-xs text-gray-500 mt-1 truncate">
+                      <p className="text-xs text-gray-500 mt-0.5 truncate hidden md:block">
                         {brand.description}
                       </p>
                     </CardContent>
@@ -302,9 +356,23 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
           </CarouselContent>
 
           {/* Navigation buttons - visible on hover */}
-          <CarouselPrevious className="left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:flex" />
-          <CarouselNext className="right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:flex" />
+          <CarouselPrevious className="left-0 -translate-x-2 lg:-translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex" />
+          <CarouselNext className="right-0 translate-x-2 lg:translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:flex" />
         </Carousel>
+      </div>
+
+      {/* Auto-scroll indicator */}
+      <div className="text-center mt-3 sm:mt-4">
+        <p className="text-xs text-gray-400 flex items-center justify-center gap-1 sm:gap-2">
+          <div
+            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full ${
+              isHovered ? 'opacity-50' : 'animate-pulse'
+            } transition-all duration-300`}
+          ></div>
+          <span className="text-xs">
+            {isHovered ? 'Paused' : 'Auto-scrolling'} • Hover to pause
+          </span>
+        </p>
       </div>
     </div>
   );

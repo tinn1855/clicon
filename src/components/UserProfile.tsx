@@ -23,11 +23,37 @@ export const UserProfile: React.FC = () => {
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="flex items-center space-x-2">
-        <Button variant="ghost" onClick={() => navigate('/signin')}>
-          Sign In
-        </Button>
-        <Button onClick={() => navigate('/signup')}>Sign Up</Button>
+      <div className="flex items-center">
+        {/* Mobile - Show only User icon */}
+        <div className="sm:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="p-2">
+                <User className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={() => navigate('/signin')}>
+                <User className="mr-2 h-4 w-4" />
+                <span>Sign In</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate('/signup')}>
+                <User className="mr-2 h-4 w-4" />
+                <span>Sign Up</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        {/* Desktop - Show text buttons */}
+        <div className="hidden sm:flex items-center space-x-2">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/signin')}>
+            Sign In
+          </Button>
+          <Button size="sm" onClick={() => navigate('/signup')}>
+            Sign Up
+          </Button>
+        </div>
       </div>
     );
   }

@@ -105,7 +105,7 @@ export const HeroBannerSlider: React.FC = () => {
         <CarouselContent>
           {heroSlides.map((slide) => (
             <CarouselItem key={slide.id}>
-              <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
+              <div className="relative py-2 sm:h-[500px] lg:h-[600px] overflow-hidden">
                 {/* Background Image with Overlay */}
                 <div
                   className="absolute inset-0 bg-cover bg-center bg-no-repeat"
