@@ -41,7 +41,7 @@ const brands: Brand[] = [
   {
     id: '2',
     name: 'Samsung',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
+    logo: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/samsung.svg',
     description: 'Inspire the world',
   },
   {
@@ -71,7 +71,7 @@ const brands: Brand[] = [
   {
     id: '7',
     name: 'NVIDIA',
-    logo: 'https://upload.wikimedia.org/wikipedia/en/2/21/Nvidia_logo.svg',
+    logo: 'https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nvidia.svg',
     description: "The way it's meant to be played",
   },
   {
@@ -364,11 +364,11 @@ export const BrandCarousel: React.FC<BrandCarouselProps> = ({
       {/* Auto-scroll indicator */}
       <div className="text-center mt-3 sm:mt-4">
         <p className="text-xs text-gray-400 flex items-center justify-center gap-1 sm:gap-2">
-          <div
+          <span
             className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full ${
               isHovered ? 'opacity-50' : 'animate-pulse'
             } transition-all duration-300`}
-          ></div>
+          ></span>
           <span className="text-xs">
             {isHovered ? 'Paused' : 'Auto-scrolling'} • Hover to pause
           </span>

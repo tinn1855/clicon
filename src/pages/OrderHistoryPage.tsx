@@ -9,7 +9,7 @@ import {
   Separator,
   Input,
 } from '@/components/atoms';
-import { Pagination } from '@/components/Pagination';
+import { ShadcnPagination } from '@/components/ShadcnPagination';
 import {
   Select,
   SelectContent,
@@ -100,7 +100,7 @@ export default function OrderHistoryPage() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
 
   // Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -123,7 +123,7 @@ export default function OrderHistoryPage() {
       };
     }
 
-    return getUserOrdersPaginated(user.id, currentPage, pageSize, {
+    return getUserOrdersPaginated(user.id, currentPage, itemsPerPage, {
       status: statusFilter,
       searchQuery: debouncedSearchQuery,
     });
@@ -131,7 +131,7 @@ export default function OrderHistoryPage() {
     user,
     isAuthenticated,
     currentPage,
-    pageSize,
+    itemsPerPage,
     statusFilter,
     debouncedSearchQuery,
     getUserOrdersPaginated,
@@ -143,7 +143,7 @@ export default function OrderHistoryPage() {
   };
 
   const handlePageSizeChange = (size: number) => {
-    setPageSize(size);
+    setItemsPerPage(size);
     setCurrentPage(1); // Reset to first page
     setSelectedOrder(null);
   };
@@ -579,15 +579,15 @@ export default function OrderHistoryPage() {
               </div>
 
               {/* Pagination */}
-              <Pagination
+              <ShadcnPagination
                 currentPage={paginatedResult.currentPage}
                 totalPages={paginatedResult.totalPages}
                 onPageChange={handlePageChange}
-                pageSize={pageSize}
+                pageSize={itemsPerPage}
                 onPageSizeChange={handlePageSizeChange}
                 totalCount={paginatedResult.totalCount}
                 isLoading={isLoading}
-                className="mt-6"
+                className="mt-8"
               />
             </>
           )}

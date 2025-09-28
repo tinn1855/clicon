@@ -54,16 +54,15 @@ export const WishlistQuickView: React.FC<WishlistQuickViewProps> = ({
   if (wishlistCount === 0) {
     return (
       <div className={cn('relative', className)} ref={dropdownRef}>
-        <button onClick={() => setIsOpen(!isOpen)}>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="relative px-1 min-[375px]:px-2 sm:px-3"
-          >
-            <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
-            <span className="hidden lg:block ml-2">Wishlist</span>
-          </Button>
-        </button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative px-1 min-[375px]:px-2 sm:px-3"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+          <span className="hidden lg:block ml-2">Wishlist</span>
+        </Button>
 
         {isOpen && (
           <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] max-w-[300px] min-[375px]:max-w-[320px] sm:max-w-[360px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 mr-2">
@@ -89,21 +88,20 @@ export const WishlistQuickView: React.FC<WishlistQuickViewProps> = ({
 
   return (
     <div className={cn('relative', className)} ref={dropdownRef}>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="relative px-1 min-[375px]:px-2 sm:px-3"
-        >
-          <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
-          {wishlistCount > 0 && (
-            <span className="bg-blue-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-medium absolute -top-1 -right-1">
-              {wishlistCount > 99 ? '99+' : wishlistCount}
-            </span>
-          )}
-          <span className="hidden lg:block ml-2">Wishlist</span>
-        </Button>
-      </button>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="relative px-1 min-[375px]:px-2 sm:px-3"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+        {wishlistCount > 0 && (
+          <span className="bg-blue-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-medium absolute -top-1 -right-1">
+            {wishlistCount > 99 ? '99+' : wishlistCount}
+          </span>
+        )}
+        <span className="hidden lg:block ml-2">Wishlist</span>
+      </Button>
 
       {isOpen && (
         <div className="absolute -right-10 sm:right-0 top-full mt-2 w-[calc(100vw-2rem)] max-w-[320px] min-[375px]:max-w-[360px] sm:max-w-[400px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 mr-2">
